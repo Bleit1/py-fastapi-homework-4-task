@@ -85,7 +85,7 @@ def create_profile(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="User already has a profile.",
         )
-    avatar_url = Any
+    avatar_url = None
     if avatar:
         try:
             file_name = f"avatars/{user_id}_avatar.jpg"
@@ -106,7 +106,7 @@ def create_profile(
                 gender=gender_enum.value,
                 date_of_birth=date_of_birth,
                 info=info,
-                avatar=file_name,
+                avatar=avatar_url,
             )
             db.add(new_profile)
             db.commit()
